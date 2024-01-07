@@ -10,7 +10,6 @@ body, html {
     align-items: center;
     font-family: "Times New Roman", Times, serif;
 }
-
 .figure-list-container {
     width: 90%; /* Adjust the width as needed */
     max-width: 1200px; /* Maximum width */
@@ -22,7 +21,6 @@ body, html {
     padding: 20px;
     gap: 20px;
 }
-
 
 .figure-item {
     display: flex;

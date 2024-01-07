@@ -5,14 +5,13 @@
     <link rel="stylesheet" href="../css/actionfigurelist.css">
 </head>
 <body>
+    <!-- Homepage Button -->
+    <a href="/source/views/homepage.html" class="homepage-button">Home</a>
+
     <div class="figure-list-container">
-        <!-- Example of an action figure item -->
-        <div class="figure-item">
-            <img src="" alt="Figure Name">
-            <div class="figure-name">Figure Name</div>
-        </div>
-        <!-- Repeat the above div for each action figure -->
+        <div id="figureDetails"></div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('http://localhost:4000/api/bootleg-action-figures')
@@ -20,44 +19,40 @@
                 .then(figures => {
                     const container = document.querySelector('.figure-list-container');
                     figures.forEach(figure => {
+                        // Create anchor tag for each figure
+                        const figureLink = document.createElement('a');
+                        figureLink.href = '/source/views/actionfiguredetail.html?id=' + figure._id; // Update the URL as needed
+                        figureLink.className = 'figure-item-link';
+
                         // Create div for each figure
                         const figureDiv = document.createElement('div');
                         figureDiv.className = 'figure-item';
-        
+
                         // Create and append image
                         const img = document.createElement('img');
                         img.src = 'your/image/route/' + figure._id; // Adjust based on how images are served
                         img.alt = figure.FigureName;
                         figureDiv.appendChild(img);
-        
+
                         // Create and append figure name
                         const name = document.createElement('div');
                         name.className = 'figure-name';
                         name.textContent = figure.FigureName;
                         figureDiv.appendChild(name);
-        
-                        // Create and append manufacturer
-                        const manufacturer = document.createElement('div');
-                        manufacturer.textContent = 'Manufacturer: ' + figure.Manufacturer;
-                        figureDiv.appendChild(manufacturer);
-        
-                        // Create and append release date
-                        const releaseDate = document.createElement('div');
-                        releaseDate.textContent = 'Release Date: ' + figure.releaseDate;
-                        figureDiv.appendChild(releaseDate);
-        
-                        // Create and append description
-                        const description = document.createElement('div');
-                        description.textContent = figure.description;
-                        figureDiv.appendChild(description);
-        
-                        // Append the figure div to the container
-                        container.appendChild(figureDiv);
+
+                        // Additional figure details (manufacturer, release date, etc.)
+                        // ...
+
+                        // Append the figure div to the anchor tag
+                        figureLink.appendChild(figureDiv);
+
+                        // Append the anchor tag to the container
+                        container.appendChild(figureLink);
                     });
                 })
                 .catch(error => console.error('Error:', error));
         });
-        </script>
-        <script src="/source/routes/actionfigurelist.js"></script>
+    </script>
+    <script src="/source/routes/actionfigurelist.js"></script>
 </body>
 </html>

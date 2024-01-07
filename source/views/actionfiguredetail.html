@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/actionfiguredetail.css">
+</head>
+<body>
+    <div id="figureDetails"></div>
+    
+    <button onclick="window.location.href='homepage.html'">Home</button>
+    <button onclick="window.location.href='actionfigurelist.html'">Figure List</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const figureId = urlParams.get('id');
+
+fetch(`http://localhost:4000/api/bootleg-action-figures/${figureId}`)
+    .then(response => response.json())
+    .then(figure => {
+        const imgElement = document.createElement('img');
+        imgElement.src = `http://localhost:4000/images/${figureId}`;
+        imgElement.alt = 'Figure Image';
+        document.getElementById('figureDetails').appendChild(imgElement);
+
+                    // Displaying figure name
+                    const nameElement = document.createElement('h2');
+                    nameElement.textContent = figure.FigureName;
+                    detailsContainer.appendChild(nameElement);
+
+                    // Displaying other details like Manufacturer, releaseDate, etc.
+                    // You can follow a similar pattern for other details
+
+                    // Displaying description
+                    const descElement = document.createElement('p');
+                    descElement.textContent = figure.description;
+                    detailsContainer.appendChild(descElement);
+
+                    // If you have image data as a URL or a base64 string
+                    // const imgElement = document.createElement('img');
+                    // imgElement.src = figure.image; // Adjust this based on how your image data is stored
+                    // detailsContainer.appendChild(imgElement);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+    <script src="/source/routes/actionfiguredetail.js"></script>
+</body>
+</html>
