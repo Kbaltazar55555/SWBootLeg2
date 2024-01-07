@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... head contents ... -->
+    <link rel="stylesheet" href="../css/actionfigurelist.css">
+</head>
+<body>
+    <div class="figure-list-container">
+        <!-- Example of an action figure item -->
+        <div class="figure-item">
+            <img src="" alt="Figure Name">
+            <div class="figure-name">Figure Name</div>
+        </div>
+        <!-- Repeat the above div for each action figure -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://localhost:4000/api/bootleg-action-figures')
+                .then(response => response.json())
+                .then(figures => {
+                    const container = document.querySelector('.figure-list-container');
+                    figures.forEach(figure => {
+                        // Create div for each figure
+                        const figureDiv = document.createElement('div');
+                        figureDiv.className = 'figure-item';
+        
+                        // Create and append image
+                        const img = document.createElement('img');
+                        img.src = 'your/image/route/' + figure._id; // Adjust based on how images are served
+                        img.alt = figure.FigureName;
+                        figureDiv.appendChild(img);
+        
+                        // Create and append figure name
+                        const name = document.createElement('div');
+                        name.className = 'figure-name';
+                        name.textContent = figure.FigureName;
+                        figureDiv.appendChild(name);
+        
+                        // Create and append manufacturer
+                        const manufacturer = document.createElement('div');
+                        manufacturer.textContent = 'Manufacturer: ' + figure.Manufacturer;
+                        figureDiv.appendChild(manufacturer);
+        
+                        // Create and append release date
+                        const releaseDate = document.createElement('div');
+                        releaseDate.textContent = 'Release Date: ' + figure.releaseDate;
+                        figureDiv.appendChild(releaseDate);
+        
+                        // Create and append description
+                        const description = document.createElement('div');
+                        description.textContent = figure.description;
+                        figureDiv.appendChild(description);
+        
+                        // Append the figure div to the container
+                        container.appendChild(figureDiv);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        </script>
+</body>
+</html>
