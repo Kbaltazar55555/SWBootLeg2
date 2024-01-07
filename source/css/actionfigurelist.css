@@ -43,6 +43,7 @@ body, html {
     color: #333;
 }
 
+
 /* Media Query for smaller screens, like tablets and phones */
 @media (max-width: 768px) {
     .figure-item {

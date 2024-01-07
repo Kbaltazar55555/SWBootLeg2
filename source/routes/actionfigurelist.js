@@ -1,24 +1,20 @@
-const urlParams = new URLSearchParams(window.location.search);
-const detailsContainer = document.getElementById('figureDetails');
-const figureId = urlParams.get('id');
+imgElement.src = `data:image/jpeg;base64,${response.image}`;
 
-img.src = `http://localhost:4000/images/${figureId}`;
+fetch('http://localhost:4000/api/bootleg-action-figures')
+    .then(response => response.json())
+    .then(figures => {
+        figures.forEach(figure => {
+            const figureDiv = document.createElement('div');
+            figureDiv.className = 'figure-item';
 
-figures.forEach(figure => {
-    const figureDiv = document.createElement('div');
-    figureDiv.className = 'figure-item';
+            const img = document.createElement('img');
+            img.src = `data:image/jpeg;base64,${figure.image}`; // Embed Base64 data
+            img.alt = figure.FigureName;
+            figureDiv.appendChild(img);
 
-    const img = document.createElement('img');
-    img.src = `http://localhost:4000/images/${figure._id}`;
-    img.alt = 'Figure Image';
-    figureDiv.appendChild(img);
+            // Append other figure details
 
-    container.appendChild(figureDiv);
-});
-
-const imgElement = document.createElement('img');
-imgElement.src = `http://localhost:4000/images/${figureId}`;
-imgElement.alt = 'Figure Image';
-
-document.getElementById('someContainer').appendChild(imgElement);
-
+            container.appendChild(figureDiv);
+        });
+    })
+    .catch(error => console.error('Error:', error));

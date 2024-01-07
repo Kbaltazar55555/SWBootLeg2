@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="../css/actionfigurelist.css">
 </head>
 <body>
-    <!-- Homepage Button -->
-    <a href="/source/views/homepage.html" class="homepage-button">Home</a>
-
+    
     <div class="figure-list-container">
         <div id="figureDetails"></div>
     </div>
+
+    <button onclick="window.location.href='homepage.html'">Home</button>
+    <button onclick="window.location.href='actionfigurelist.html'">Figure List</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -19,40 +20,25 @@
                 .then(figures => {
                     const container = document.querySelector('.figure-list-container');
                     figures.forEach(figure => {
-                        // Create anchor tag for each figure
+                        // Create a clickable container for each figure
                         const figureLink = document.createElement('a');
-                        figureLink.href = '/source/views/actionfiguredetail.html?id=' + figure._id; // Update the URL as needed
-                        figureLink.className = 'figure-item-link';
-
-                        // Create div for each figure
-                        const figureDiv = document.createElement('div');
-                        figureDiv.className = 'figure-item';
+                        figureLink.href = `/source/views/actionfiguredetail.html?id=${figure._id}`; // Link to detail page with figure ID
+                        figureLink.className = 'figure-item';
 
                         // Create and append image
-                        const img = document.createElement('img');
-                        img.src = 'your/image/route/' + figure._id; // Adjust based on how images are served
-                        img.alt = figure.FigureName;
-                        figureDiv.appendChild(img);
+                        const imgElement = document.createElement('img');
+                        imgElement.src = `data:image/jpeg;base64,${figure.image}`;
+                        imgElement.alt = 'Figure Image';
+                        figureLink.appendChild(imgElement);
 
-                        // Create and append figure name
-                        const name = document.createElement('div');
-                        name.className = 'figure-name';
-                        name.textContent = figure.FigureName;
-                        figureDiv.appendChild(name);
+                        // Optionally append other figure details to 'figureLink'
 
-                        // Additional figure details (manufacturer, release date, etc.)
-                        // ...
-
-                        // Append the figure div to the anchor tag
-                        figureLink.appendChild(figureDiv);
-
-                        // Append the anchor tag to the container
+                        // Append the clickable container to the main container
                         container.appendChild(figureLink);
                     });
                 })
                 .catch(error => console.error('Error:', error));
         });
-    </script>
-    <script src="/source/routes/actionfigurelist.js"></script>
+    </script>    
 </body>
 </html>
