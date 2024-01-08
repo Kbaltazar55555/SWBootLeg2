@@ -19,15 +19,58 @@
                 .then(figure => {
                     const figureDetails = document.getElementById('figureDetails');
                     
-                    // Create and append the image element
+                    // Image element
                     const imgElement = document.createElement('img');
-                    imgElement.src = `/uploads/${figure.imagePath}`; // Update to use the image path
+                    imgElement.src = `http://localhost:4000/${figure.imagePath}`;
                     imgElement.alt = 'Figure Image';
                     figureDetails.appendChild(imgElement);
 
-                    // Displaying other figure details
-                    // Example: Name, Manufacturer, etc.
-                    // You can create and append other elements to 'figureDetails'
+                    // Figure Name
+                    const nameElement = document.createElement('h2');
+                    nameElement.textContent = figure.FigureName;
+                    figureDetails.appendChild(nameElement);
+
+                    // Manufacturer
+                    const manufacturerElement = document.createElement('p');
+                    manufacturerElement.textContent = `Manufacturer: ${figure.Manufacturer}`;
+                    figureDetails.appendChild(manufacturerElement);
+
+                    // Release Date
+                    const releaseDateElement = document.createElement('p');
+                    releaseDateElement.textContent = `Release Date: ${figure.releaseDate}`;
+                    figureDetails.appendChild(releaseDateElement);
+
+                    // Description
+                    const descriptionElement = document.createElement('p');
+                    descriptionElement.textContent = figure.description;
+                    figureDetails.appendChild(descriptionElement);
+
+                    // Edit button
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Edit';
+                    editButton.onclick = function() {
+                        window.location.href = `/source/views/editactionfiguredetail.html?id=${figure._id}`;
+                    };
+                    figureDetails.appendChild(editButton);
+
+                    // Delete button
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.onclick = function() {
+                        if(confirm('Are you sure you want to delete this figure?')) {
+                            fetch(`http://localhost:4000/api/bootleg-action-figures/${figure._id}`, {
+                                method: 'DELETE'
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                window.location.href = '/source/views/actionfigurelist.html';
+                            })
+                            .catch(error => console.error('Error:', error));
+                        }
+                    };
+                    figureDetails.appendChild(deleteButton);
 
                 })
                 .catch(error => console.error('Error:', error));

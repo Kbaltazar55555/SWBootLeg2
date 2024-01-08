@@ -1,55 +1,24 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh; /* Ensures at least full viewport height */
-    background-image: url('/images/Star\ wars\ figure\ background.jpg');
-    background-size: cover;
-    background-position: center;
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
-    font-family: "Times New Roman", Times, serif;
-}
-.figure-list-container {
-    width: 90%; /* Adjust the width as needed */
-    max-width: 1200px; /* Maximum width */
-    margin: 0 auto; /* Centering */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-    gap: 20px;
+.centered-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 40%; /* Image can scale up to the width of its container */
+    max-height: 100px; /* Maximum height */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
 }
 
-.figure-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Example color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.figure-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.figure-name {
-    margin-top: 10px;
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Media Query for smaller screens, like tablets and phones */
-@media (max-width: 768px) {
-    .figure-item {
-        width: 150px; /* Adjust width for smaller screens */
-    }
-
-    .figure-name {
-        font-size: 1em; /* Smaller font size for readability */
-    }
+button:hover {
+    background-color: #45a049;
 }

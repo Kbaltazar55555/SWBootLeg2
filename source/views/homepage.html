@@ -51,8 +51,7 @@
 <body>
     <div class="container">
         <h1>Star Wars Bootleg Reference Guide</h1>
-        <form id="actionFigureForm" enctype="multipart/form-data">
-
+        <form id="editFigureForm" enctype="multipart/form-data">
             <label for="FigureName">Figure Name:</label>
             <input type="text" id="FigureName" name="FigureName" required>
 
@@ -68,14 +67,12 @@
             <input type="file" name="image" />
 
             <button type="submit">Submit</button> 
-            <form action="http://localhost:4000/upload" method="post" enctype="multipart/form-data">
-
-            </form>f  
+            <form action="http://localhost:4000/upload" method="post" enctype="multipart/form-data">  
         </form>
         <a href="/source/views/actionfigurelist.html" class="action-figure-list-btn">View Action Figure List</a>
     </div>
     <script>
-        document.getElementById('actionFigureForm').addEventListener('submit', function(e) {
+        document.getElementById('editFigureForm').addEventListener('submit', function(e) {
             e.preventDefault();
     
             const formData = new FormData(this);
@@ -91,14 +88,14 @@
             })
             .then(data => {
                 console.log('Success:', data);
-                window.location.href = '/source/views/actionfigurelist.html'; // Redirect on success
+                window.location.href = '/source/views/actionfigurelist.html'; 
             })
             .catch((error) => {
                 console.error('Error:', error);
-                // Handle errors here, e.g., show an error message to the user
             });
         });
     </script>
+    
     
 </body>
 </html>

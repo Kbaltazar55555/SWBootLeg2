@@ -1,0 +1,46 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensures at least full viewport height */
+    background-image: url('/images/Star\ wars\ figure\ background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.container {
+    width: 40%;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+form input, form textarea, form button {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
