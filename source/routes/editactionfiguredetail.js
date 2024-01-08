@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(this);
+        console.log('formData before sending requet: ', formData)
     
         fetch(`http://localhost:4000/api/bootleg-action-figures/${figureId}`, {
             method: 'PUT',

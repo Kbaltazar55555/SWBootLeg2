@@ -11,9 +11,6 @@ fetch('http://localhost:4000/api/bootleg-action-figures')
             img.alt = figure.FigureName;
             figureDiv.appendChild(img);
 
-            // Append other figure details
-            // ...
-
             container.appendChild(figureDiv);
         });
     })

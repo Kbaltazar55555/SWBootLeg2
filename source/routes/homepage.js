@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Code for fetching action figures
+
     if (window.location.href.includes('actionfigurelist.html')) {
         fetch('http://localhost:4000/api/bootleg-action-figures')
             .then(response => {
@@ -13,24 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!container) return; 
 
                 figures.forEach(figure => {
-                    // Create elements to display each figure
                     const figureDiv = document.createElement('div');
                     figureDiv.className = 'figure-item';
 
-                    // Create and append the image
+                    // Create and provide image
                     const img = document.createElement('img');
                     img.src = `http://localhost:4000/${figure.imagePath}`;
                     img.alt = figure.FigureName;
                     figureDiv.appendChild(img);
 
-                    // Append other details of the figure (FigureName, Manufacturer, etc.)
-                    // ...
-
                     container.appendChild(figureDiv);
                 });
             })
             .catch(error => console.error('Error:', error));
-    }
+        }
 
     // Code for handling form submission
     const form = document.getElementById('actionFigureForm');
