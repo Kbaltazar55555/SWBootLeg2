@@ -1,0 +1,56 @@
+About the App:
+
+The STAR WARS Bootleg Action Figures Tracker is a platform designed for enthusiasts and collectors of unique and rare bootleg action figures from around the world. Our app allows you to research, discover, and collect unseen actionfigures in the wild.
+
+Features:
+
+Global Database: Extensive research capabilities to explore bootleg action figures from various countries.
+User Control: Editing, Delete, allowance for every user to keep responsibility among all collectors 
+
+Shifting to Stetch: 
+
+Profile user
+favorites list
+
+Stretch Goals: 
+
+Marketplace Integration - Direct connection to online marketplaces like eBay, making it easier to search and acquire specific action figures.
+User Profiles - Personalize your experience. Create profiles to favorite/bookmark your preferred Bootleg figures for future reference
+
+Organization: 
+
+Back: 
+app.js
+db.js
+routes/
+routesauthenticactionfigure.js
+routebootlegaactionfigure.js
+models/
+modelauthenticactionfigure.js
+modelbootlegactionfigure.js
+controllers/
+controllerauthenticactionfigure.js
+controllerbootlegactionfigure.js
+
+front: 
+netlify.html
+index.html
+views/
+actionfiguredetail.html
+actionfigurelist.html
+editactionfiguredetail.html
+JS/
+actionfiguredetail.js
+actionfigurelist.js
+editactionfiguredetail.js
+homepage.js
+css/
+actionfiguredetail.css
+actionfigurelist.css
+editactionfiguredetail.css
+homepage.css
+
+Resources: 
+
+Labs, https://collectorarchive.com/, ChatGPT
+
