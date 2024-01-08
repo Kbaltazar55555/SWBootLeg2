@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Edit Action Figure</title>
     <link rel="stylesheet" href="../css/editactionfiguredetail.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-    <body>
+<body>
     <div class="container">
         <h1>Edit Action Figure</h1>
         <form id="editFigureForm">
@@ -25,49 +26,8 @@
             <textarea id="description" name="description" required></textarea>
 
             <button type="submit">Update Figure</button>
-         </form>
-        </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const figureId = urlParams.get('id');
-        const form = document.getElementById('editFigureForm');
-
-        // Fetch the current details of the figure
-        fetch(`http://localhost:4000/api/bootleg-action-figures/${figureId}`)
-            .then(response => response.json())
-            .then(figure => {
-                // Populate the form fields with current figure data
-                document.getElementById('FigureName').value = figure.FigureName;
-                document.getElementById('Manufacturer').value = figure.Manufacturer;
-                document.getElementById('releaseDate').value = figure.releaseDate;
-                document.getElementById('description').value = figure.description;
-            })
-            .catch(error => console.error('Error:', error));
-
-            // Handle form submission
-            form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-
-            // Send a PUT request to update the figure
-            fetch(`http://localhost:4000/api/bootleg-action-figures/${figureId}`, {
-                method: 'PUT',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Update successful:', data);
-                window.location.href = '/source/views/actionfigurelist.html';
-            })
-            .catch(error => console.error('Error:', error));
-        });
-     });
-    </script>
-    </body>
+        </form>
+    </div>
+    <script src="../routes/editactionfiguredetail.js"></script>
+</body>
 </html>
