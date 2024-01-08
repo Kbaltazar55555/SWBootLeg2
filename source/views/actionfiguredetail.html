@@ -18,15 +18,17 @@
                 .then(response => response.json())
                 .then(figure => {
                     const figureDetails = document.getElementById('figureDetails');
-    
-                    // Assuming 'figure.image' is a binary blob
-                    const blob = new Blob([figure.image], { type: 'image/jpeg' });
+                    
+                    // Create and append the image element
                     const imgElement = document.createElement('img');
-                    imgElement.src = URL.createObjectURL(blob);
+                    imgElement.src = `/uploads/${figure.imagePath}`; // Update to use the image path
                     imgElement.alt = 'Figure Image';
                     figureDetails.appendChild(imgElement);
 
-                    // ... displaying other figure details ...
+                    // Displaying other figure details
+                    // Example: Name, Manufacturer, etc.
+                    // You can create and append other elements to 'figureDetails'
+
                 })
                 .catch(error => console.error('Error:', error));
         });

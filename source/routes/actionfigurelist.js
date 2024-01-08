@@ -1,18 +1,18 @@
-imgElement.src = `data:image/jpeg;base64,${response.image}`;
-
 fetch('http://localhost:4000/api/bootleg-action-figures')
     .then(response => response.json())
     .then(figures => {
+        const container = document.querySelector('.figure-list-container');
         figures.forEach(figure => {
             const figureDiv = document.createElement('div');
             figureDiv.className = 'figure-item';
 
             const img = document.createElement('img');
-            img.src = `data:image/jpeg;base64,${figure.image}`; // Embed Base64 data
+            img.src = `http://localhost:4000/${figure.imagePath}`;
             img.alt = figure.FigureName;
             figureDiv.appendChild(img);
 
             // Append other figure details
+            // ...
 
             container.appendChild(figureDiv);
         });

@@ -11,7 +11,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(figures => {
                 const container = document.querySelector('.figure-list-container');
                 if (!container) return; 
-                // ... process figures ...
+
+                figures.forEach(figure => {
+                    // Create elements to display each figure
+                    const figureDiv = document.createElement('div');
+                    figureDiv.className = 'figure-item';
+
+                    // Create and append the image
+                    const img = document.createElement('img');
+                    img.src = `http://localhost:4000/${figure.imagePath}`;
+                    img.alt = figure.FigureName;
+                    figureDiv.appendChild(img);
+
+                    // Append other details of the figure (FigureName, Manufacturer, etc.)
+                    // ...
+
+                    container.appendChild(figureDiv);
+                });
             })
             .catch(error => console.error('Error:', error));
     }
@@ -36,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log('Success:', data);
-                window.location.href = '/source/views/actionfigurelist.html';
+                window.location.href = '/source/views/actionfigurelist.html'; 
             })
             .catch((error) => {
                 console.error('Error:', error);

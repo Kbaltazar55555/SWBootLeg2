@@ -6,13 +6,13 @@
 </head>
 <body>
     
-    <div class="figure-list-container">
-        <div id="figureDetails"></div>
-    </div>
+    <!-- The container for the figures -->
+    <div class="figure-list-container"></div>
 
     <button onclick="window.location.href='homepage.html'">Home</button>
     <button onclick="window.location.href='actionfigurelist.html'">Figure List</button>
 
+    <!-- Script for fetching and displaying figures -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('http://localhost:4000/api/bootleg-action-figures')
@@ -20,25 +20,43 @@
                 .then(figures => {
                     const container = document.querySelector('.figure-list-container');
                     figures.forEach(figure => {
-                        // Create a clickable container for each figure
                         const figureLink = document.createElement('a');
-                        figureLink.href = `/source/views/actionfiguredetail.html?id=${figure._id}`; // Link to detail page with figure ID
+                        figureLink.href = `/source/views/actionfiguredetail.html?id=${figure._id}`;
                         figureLink.className = 'figure-item';
-
-                        // Create and append image
+        
+                        // Image element
                         const imgElement = document.createElement('img');
-                        imgElement.src = `data:image/jpeg;base64,${figure.image}`;
+                        imgElement.src = `http://localhost:4000/${figure.imagePath}`;
                         imgElement.alt = 'Figure Image';
                         figureLink.appendChild(imgElement);
-
-                        // Optionally append other figure details to 'figureLink'
-
-                        // Append the clickable container to the main container
+        
+                        // Figure Name
+                        const nameElement = document.createElement('div');
+                        nameElement.className = 'figure-name';
+                        nameElement.textContent = figure.FigureName;
+                        figureLink.appendChild(nameElement);
+        
+                        // Manufacturer
+                        const manufacturerElement = document.createElement('div');
+                        manufacturerElement.textContent = 'Manufacturer: ' + figure.Manufacturer;
+                        figureLink.appendChild(manufacturerElement);
+        
+                        // Release Date
+                        const releaseDateElement = document.createElement('div');
+                        releaseDateElement.textContent = 'Release Date: ' + figure.releaseDate;
+                        figureLink.appendChild(releaseDateElement);
+        
+                        // Description
+                        const descriptionElement = document.createElement('div');
+                        descriptionElement.textContent = figure.description;
+                        figureLink.appendChild(descriptionElement);
+        
+                        // Append the figure link to the container
                         container.appendChild(figureLink);
                     });
                 })
                 .catch(error => console.error('Error:', error));
         });
-    </script>    
+    </script>
 </body>
 </html>

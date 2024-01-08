@@ -27,7 +27,7 @@
         form label {
             margin-top: 10px;
         }
-        form input, form button, .action-figure-list-btn {
+        form input, form textarea, form button, .action-figure-list-btn {
             padding: 10px;
             margin-top: 5px;
         }
@@ -51,9 +51,7 @@
 <body>
     <div class="container">
         <h1>Star Wars Bootleg Reference Guide</h1>
-        <form id="actionFigureForm" action="http://localhost:4000/api/bootleg-action-figures" method="POST" enctype="multipart/form-data">
-            <label for="image">Image:</label>
-            <input type="file" id="figureImage" name="image" accept="image/*">
+        <form id="actionFigureForm" enctype="multipart/form-data">
 
             <label for="FigureName">Figure Name:</label>
             <input type="text" id="FigureName" name="FigureName" required>
@@ -67,10 +65,40 @@
             <label for="description">Description:</label>
             <textarea id="description" name="description" required></textarea>
 
+            <input type="file" name="image" />
+
             <button type="submit">Submit</button> 
+            <form action="http://localhost:4000/upload" method="post" enctype="multipart/form-data">
+
+            </form>f  
         </form>
         <a href="/source/views/actionfigurelist.html" class="action-figure-list-btn">View Action Figure List</a>
     </div>
-    <script src="/source/routes/homepage.js"></script>
+    <script>
+        document.getElementById('actionFigureForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+    
+            const formData = new FormData(this);
+            fetch('http://localhost:4000/api/bootleg-action-figures', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = '/source/views/actionfigurelist.html'; // Redirect on success
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle errors here, e.g., show an error message to the user
+            });
+        });
+    </script>
+    
 </body>
 </html>
