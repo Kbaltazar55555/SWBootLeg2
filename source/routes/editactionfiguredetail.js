@@ -24,13 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
         form.addEventListener('submit', function(e) {
+            console.log(this)
             e.preventDefault();
             const formData = new FormData(this);
+            // console.log(formData.getAll());
+
+
 
             fetch(`http://localhost:4000/api/bootleg-action-figures/${figureId}`, {
                 method: 'PUT',
                 body: formData
             })
+         
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
