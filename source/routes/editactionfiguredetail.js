@@ -24,34 +24,39 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
         form.addEventListener('submit', function(e) {
-            console.log(this)
             e.preventDefault();
             const formData = new FormData(this);
             // console.log(formData.getAll());
 
-
-
             fetch(`http://localhost:4000/api/bootleg-action-figures/${figureId}`, {
-                method: 'PUT',
-                body: formData
-            })
-         
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(() => {
-                window.location.href = '/source/views/actionfigurelist.html';
-            })
-            .catch(error => {
-                console.error('Error updating figure:', error);
-                // Display an error message or handle as needed
-            });
+    method: 'PUT',
+    body: formData
+})
+.then(response => {
+    // Check if the response is in JSON format
+    if (response.headers.get("content-type").includes("application/json")) {
+        return response.json();
+    } else {
+        // Handle non-JSON response here
+        // For example, you might just return a success message
+        return response.text().then(text => ({ status: response.status, text }));
+    }
+})
+.then(data => {
+    if (data.status && data.status === 200) {
+        window.location.href = '/source/views/actionfigurelist.html';
+    } else {
+        console.error('Error updating figure:', data.text);
+        // Display an error message or handle as needed
+    }
+})
+.catch(error => {
+    console.error('Error updating figure:', error);
+    // Display an error message or handle as needed
+});
+
         });
     } else {
         console.error('Figure ID is undefined.');
-        // Display an error message or redirect as needed
     }
 });
